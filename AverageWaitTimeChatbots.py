@@ -55,7 +55,7 @@ def avgwaittime(business_id,customer_email,no):
         final = resultcount * waittime
         result = str(final)
         print(result)
-        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Average_Wait_Time':result,'Token':token_number,'business_hour_start':bhs,'business_hour_end':bhe,'breaktime_st':bbts,'breaktime_end':bbte,'business_address':add}, sort_keys=True, indent=4))
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Average_Wait_Time':result,'Token':token_number,'business_hour_start':bhs,'business_hour_end':bhe,'breaktime_st':bbts,'breaktime_end':bbte,'business_address':add, 'Message':'New Token'}, sort_keys=True, indent=4))
     else:
       pass
     cur.close()
