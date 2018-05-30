@@ -3,12 +3,12 @@ import psycopg2
 import datetime
 from flask import Flask,request,jsonify
 app = Flask(__name__)
-def avgwaittime(business_id,customer_email,no):
+def avgwaittime(business_id,customer_email,no,customer_appointment_date):
     
     business_id = business_id
     Today_date = datetime.datetime.utcnow().date().strftime('%Y-%m-%d')
     print(Today_date)
-    customer_appointment_date = Today_date
+    customer_appointment_date = customer_appointment_date
    
     customer_email = customer_email
     token_number = no
@@ -51,13 +51,14 @@ def avgwaittime(business_id,customer_email,no):
     bbte = val[3]
     add = val[4]
     print(bhs,bhe,bbts,bbte,add)
-    if appointment_type in ['token']:
+    if appointment_type in ['token'] and customer_appointment_date == Today_date:
         final = resultcount * waittime
         result = str(final)
         print(result)
-        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Average_Wait_Time':result,'Token':token_number,'business_hour_start':bhs,'business_hour_end':bhe,'breaktime_st':bbts,'breaktime_end':bbte,'business_address':add, 'Message':'New Token'}, sort_keys=True, indent=4))
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Average_Wait_Time':result,'Token':token_number,'business_hour_start':bhs,'business_hour_end':bhe,'breaktime_st':bbts,'breaktime_end':bbte,'business_address':add, 'Message':'New Token','Day':'Today'}, sort_keys=True, indent=4))
     else:
-      pass
+      #pass
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Average_Wait_Time':'0','Token':token_number,'business_hour_start':bhs,'business_hour_end':bhe,'breaktime_st':bbts,'breaktime_end':bbte,'business_address':add, 'Message':'New Token','Day':'Tomorrow'}, sort_keys=True, indent=4))
     cur.close()
     con.close()      
  
