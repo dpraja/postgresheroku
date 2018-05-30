@@ -19,6 +19,9 @@ def updatecustomerinfochatbots(request):
     
     Today_date = datetime.datetime.utcnow().date().strftime('%Y-%m-%d')
     print(type(Today_date),Today_date)
+    Tomorrow_date = datetime.datetime.utcnow().date()+ datetime.timedelta(days=1)
+    Tomorrow_date = Tomorrow_date.strftime('%Y-%m-%d')
+    print(Tomorrow_date)
     business_name = request.json['business_name']
     business_name = "Dr"+" "+business_name
     try:
@@ -47,7 +50,7 @@ def updatecustomerinfochatbots(request):
     customer_photo_url = "Chatbots"
     customer_deviceid = "Chatbots"
     customer_consolidated_activities = "loggedin"
-    customer_appointment_date = Today_date
+    customer_appointment_date = request.json['customer_appointment_date']
     
     sqlend = ("select business_hour_end ,business_appointment_type from business_primary where  business_id = "+business_id+"")
     print(sqlend)
@@ -58,8 +61,8 @@ def updatecustomerinfochatbots(request):
     print(business_end_time)
     print( b_type)
     if b_type in ['token']:
-      if customer_appointment_date != Today_date:
-          return (json.dumps({'Status': 'Success', 'StatusCode': '200','Message':"Token can't be generated other than today"}, sort_keys=True, indent=4)) 
+      if customer_appointment_date != Today_date and customer_appointment_date != Tomorrow_date:
+          return (json.dumps({'Status': 'Success', 'StatusCode': '200','Message':"Token can be generated only for today and tomorrow "}, sort_keys=True, indent=4)) 
       if business_end_time <= current_time :
           return (json.dumps({'Status': 'Success', 'StatusCode': '200','Message':'AOH'}, sort_keys=True, indent=4))
       else:
@@ -74,7 +77,7 @@ def updatecustomerinfochatbots(request):
            print(sql)
            cursor.execute(sql)
            con.commit()
-           return(tokengeneration(business_id,customer_email))
+           return(tokengeneration(business_id,customer_email,customer_appointment_date))
         else:
 
             #for field in result:
