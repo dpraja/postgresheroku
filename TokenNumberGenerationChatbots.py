@@ -5,12 +5,12 @@ from flask import Flask,request,jsonify
 import sys
 from AverageWaitTimeChatbots import avgwaittime
 #app.route('/token',methods=['POST'])
-def tokengeneration(id,email):
+def tokengeneration(id,email,date):
 
      business_id = id
      Today_date = datetime.datetime.utcnow().date().strftime('%Y-%m-%d')
      print(Today_date)
-     customer_appointment_date = Today_date
+     customer_appointment_date = date
      customer_email = email
      try:
       con = psycopg2.connect(user='quywvejawxhnse',password='065fe8ac62d76caa061d1e517b2f0107b5776f767037c2e29cad16c259a771cf',host='ec2-176-34-113-15.eu-west-1.compute.amazonaws.com',port='5432',database='d3opaj0jiqsm0h')
@@ -66,7 +66,7 @@ def tokengeneration(id,email):
      cur.execute(psql)
      con.commit()
 	 #COMMENT
-     return(avgwaittime(business_id,customer_email,no))
+     return(avgwaittime(business_id,customer_email,no,customer_appointment_date))
      #return json.dumps({'Message': 'Token Generated', 'Status': 'success','TokenNumber':no}, sort_keys=True, indent=4)
 	 
      con.close()
