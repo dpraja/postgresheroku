@@ -76,7 +76,8 @@ def getlivetokenrecord(request):
      for i in result:
           print(i)
           if i['customer_appointment_date'] == Today_date:
-               d['Today_customer_appointment_date'] = i['customer_appointment_date']
+               
+               d['Today_customer_appointment_date'] = "Today"
                d['Today_customer_token_num'] = i['customer_token_num']
                business_id = i['business_id']
                business_id = str(i['business_id'])
@@ -91,7 +92,7 @@ def getlivetokenrecord(request):
                d['Today_awt'] = aws(business_id,i['customer_appointment_date'],customer_email)
                d['Today_current_token'] = current_token(business_id)
           elif i['customer_appointment_date'] == Tomorrow_date:
-               d['Tomorrow_date_customer_appointment_date'] = i['customer_appointment_date']
+               d['Tomorrow_date_customer_appointment_date'] = "Tomorrow"
                d['Tomorrow_date_token_num'] = i['customer_token_num']
                business_id = i['business_id']
                business_id = str(i['business_id'])
