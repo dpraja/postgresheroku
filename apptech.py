@@ -38,6 +38,7 @@ from GetBusinessReportIndividual import getbusinessreport
 from SendEmailAll import sendemailall
 from GetBusinessReportAllDate import getbusinessreportalldate
 from SendSms import sendsms
+from doctorapp import getlivetokenrecord
 import json
 
 app = Flask(__name__)
@@ -155,6 +156,9 @@ def reportalldate():
 def sms():
    return sendsms(request)
 
+@app.route('/Getlivefeeddoctorapp',methods=['POST'])
+def getlivetoken():
+   return getlivetokenrecord(request)
 
 
 if __name__ == "__main__":
