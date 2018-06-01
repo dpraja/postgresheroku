@@ -86,6 +86,7 @@ def getlivetokenrecord(request):
                print(type(data),data)
                docid = ''.join(data)
                print(docid,type(docid))
+               docid = docid[3:]
                d['Today_business_name'] = docid
                d['Today_awt'] = aws(business_id,i['customer_appointment_date'],customer_email)
                d['Today_current_token'] = current_token(business_id)
@@ -100,6 +101,7 @@ def getlivetokenrecord(request):
                print(type(data),data)
                docid = ''.join(data)
                print(docid,type(docid))
+               docid = docid[3:]
                d['Tomorrow_business_name'] = docid
                d['Tomorrow_awt'] = aws(business_id,i['customer_appointment_date'],customer_email)
      print(d)          
