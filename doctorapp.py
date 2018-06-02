@@ -16,8 +16,8 @@ def current_token(business_id):
      cur.execute(psql)
      token_status = cur.fetchone()
      
-     token_status = ''.join(token_status)
-     print(token_status)
+     #token_status = ''.join(token_status)
+     #print(token_status)
      return(token_status)
 def aws(business_id,customer_appointment_date,customer_email):
      
