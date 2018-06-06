@@ -31,3 +31,4 @@ worker: gunicorn GetBusinessReportIndividualDate.py
 worker: gunicorn SendSms.py
 worker: gunicorn schedulesms.py
 worker: gunicorn doctorapp.py
+worker: gunicorn SendSmsIvr.py
