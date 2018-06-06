@@ -39,6 +39,7 @@ from SendEmailAll import sendemailall
 from GetBusinessReportAllDate import getbusinessreportalldate
 from SendSms import sendsms
 from doctorapp import getlivetokenrecord
+from SendSmsIvr import sendsmsivr
 import json
 
 app = Flask(__name__)
@@ -159,7 +160,9 @@ def sms():
 @app.route('/Getlivefeeddoctorapp',methods=['POST'])
 def getlivetoken():
    return getlivetokenrecord(request)
-
+@app.route('/SendSmsIvr',methods=['POST'])     
+def smsivr():
+   return sendsmsivr(request)
 
 if __name__ == "__main__":
    app.run(debug=True)
