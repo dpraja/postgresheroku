@@ -52,6 +52,7 @@ def sendsmsivr(request):
     
           mobile = request.json['mobile']
           date = request.json['date']
+          
           sql = ("select * from customer_details where customer_appointment_date = '"+date+"' and customer_email = '"+mobile+"'")
           cur.execute(sql)
           print(sql)
@@ -64,7 +65,9 @@ def sendsmsivr(request):
           result = json.dumps(final,indent=3,default=myconverter)
           result = json.loads(result)
           print("res",result,type(result))
-          business_id = result[0]['business_id']
+          
+          business_id = request.json['business_id']
+          cc = request.json['cc']#result[0]['business_id']
           query = "select business_first_name from business_primary where business_id = "+str(business_id)+""
           cur.execute(query)
           data = cur.fetchone()
@@ -79,7 +82,7 @@ def sendsmsivr(request):
           #d['Today_business_name'] = docid
           message = "Your Appointment is Confirmed with Dr. "+docid+", Token Number: "+token+" , Appointment Date: "+app_date+", Average Wait Time: "+awt+". "
           print(message)
-          url = "https://control.msg91.com/api/sendhttp.php?authkey=195833ANU0xiap5a708d1f&mobiles="+mobile+"&message="+message+"&sender=InfoIt&route=4&country=91"
+          url = "https://control.msg91.com/api/sendhttp.php?authkey=195833ANU0xiap5a708d1f&mobiles="+mobile+"&message="+message+"&sender=InfoIt&route=4&country="+cc+""
           req = urllib.request.Request(url)
           with urllib.request.urlopen(req) as response:
              the_page = response.read()
