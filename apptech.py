@@ -44,7 +44,7 @@ import json
 
 app = Flask(__name__)
 
-#CORS(app)
+CORS(app)
 
 @app.route("/")
 def hello():
