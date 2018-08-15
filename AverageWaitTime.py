@@ -47,7 +47,7 @@ def avgwaittime():
         final = resultcount * waittime
         result = str(final)
         print(result)
-        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Average Wait Time':result}, sort_keys=True, indent=4))
+        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Average_Wait_Time':result}, sort_keys=True, indent=4))
     else:
       pass
     cur.close()
