@@ -25,9 +25,20 @@ def callfn(sql):
  
  len_mail = len(mail)    
  #receiver = request.json['receiver']
- message = request.json['message']
- data = message.split("|")
- #print(data)
+ sender = request.json['sender']
+ receiver = request.json['receiver']
+ message_no = request.json
+ #data = request.json['message']
+ print(message_no)
+ val1 = message_no['name']
+ val2 = message_no['message']
+ val3 = message_no['token_num']
+ val4 = message_no['wait_time']
+ val5 = message_no['bus_hour']
+ val6 = message_no['break_time']
+ val7 = message_no['address']
+ val8 = message_no['hospital']
+
  subject = request.json['subject']
  msg = MIMEMultipart()
  msg['from'] = sender
@@ -45,16 +56,16 @@ def callfn(sql):
       <body>
         <dl>
         <dt>
-        <p><font size="2" color="black">"""+str(data[0])+"""</font></p>
+        <p><font size="2" color="black">"""+val1+"""</font></p>
         
-        <p><font size="4" color="blue">"""+str(data[1])+"""</font></p>
+        <p><font size="4" color="blue">"""+val2+"""</font></p>
         <dd>
-        <p><font size="2" color="black">"""+str(data[2])+"""</font></p>
-        <p><font size="2" color="black">"""+str(data[3])+"""</font></p>
-        <p><font size="2" color="black">"""+str(data[4])+"""</font></p>
-        <p><font size="2" color="black">"""+str(data[5])+"""</font></p>
-        <p><i><font size="2" color="blue">"""+str(data[6])+"""</font></i></p>
-        <p><font size="4" color="blue">"""+str(data[7])+"""</font></p>
+        <p><font size="2" color="black">"""+val3+"""</font></p>
+        <p><font size="2" color="black">"""+val4+"""</font></p>
+        <p><font size="2" color="black">"""+val5+"""</font></p>
+        <p><font size="2" color="black">"""+val6+"""</font></p>
+        <p><i><font size="2" color="blue">"""+val7+"""</font></i></p>
+        <p><font size="4" color="blue">"""+val8+"""</font></p>
  
         </dd>
         </dl>
@@ -66,8 +77,8 @@ def callfn(sql):
      #msg.attach(MIMEText(msg['subject'],'plain'))
      msg.attach(MIMEText(html,'html'))
      
-     gmailuser = 'infocuit.raja@gmail.com'
-     password = 'P@#11word'
+     gmailuser = 'infocuit.testing@gmail.com'
+     password = 'infocuit@123'
      server = smtplib.SMTP('smtp.gmail.com',587)
      server.starttls()
      server.login(gmailuser,password)
@@ -77,7 +88,7 @@ def callfn(sql):
      server.quit()
  print ("the message has been sent successfully") 
 
- return(json.dumps({'Message': 'Message Send Successfully'}, sort_keys=True, indent=4))    
+ return(json.dumps({'Message': 'Message Send Successfully','Returncode':'MSS'}, sort_keys=True, indent=4))
 def sendemailall(request):
 
  customer_appointment_date_from = request.json['appointment_date_from'] 
