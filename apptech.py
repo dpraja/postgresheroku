@@ -40,9 +40,11 @@ from GetBusinessReportAllDate import getbusinessreportalldate
 from SendSms import sendsms
 from doctorapp import getlivetokenrecord
 from SendSmsIvr import sendsmsivr
-import json
+from GetBusinessReportAllBusiness import businessreportalldateandbusinessid
 
+import json
 from flask_cors import CORS
+
 app = Flask(__name__)
 CORS(app)
 
@@ -165,6 +167,10 @@ def getlivetoken():
 @app.route('/SendSmsIvr',methods=['POST'])     
 def smsivr():
    return sendsmsivr(request)
+
+@app.route('/businessreportalldateandbusinessid',methods=['GET'])     
+def BusinessReport_getreport():
+   return businessreportalldateandbusinessid(request)
 
 if __name__ == "__main__":
    app.run(debug=True)
