@@ -32,3 +32,4 @@ worker: gunicorn SendSms.py
 worker: gunicorn schedulesms.py
 worker: gunicorn doctorapp.py
 worker: gunicorn SendSmsIvr.py
+worker: gunicorn GetBusinessReportAllBusiness.py
