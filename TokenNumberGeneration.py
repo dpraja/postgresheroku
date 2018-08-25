@@ -30,7 +30,7 @@ def tokengeneration(request):
           print(tokennum,type(tokennum))
      if tokennum > 0  :
           #tokennum = 0
-          return json.dumps({'Message': 'AlreadyExists', 'Status': 'failure','TokenNumber':tokennum}, sort_keys=True, indent=4)
+          return json.dumps({'Message': 'AlreadyExists', 'Status': 'success','TokenNumber':tokennum}, sort_keys=True, indent=4)
      elif len(result)== 0:
           return json.dumps({'Message': 'DataNotExists', 'Status': 'failure','TokenNumber':tokennum}, sort_keys=True, indent=4)
      elif tokennum  == 0 or tokennum is None :
